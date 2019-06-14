@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Characters</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<style>
+		body, html {
+			height: 100%;
+			margin: 0;
+		}
+		
+		#mySidebar{
+			font-family: Times New Roman;
+		}
+		
+		.hero-image {
+		  background-image: url("bg00.jpg");
+		  height: 85%;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  position: relative;
+		  
+		}
+		.hero-text {
+			font-family: impact; 
+			letter-spacing: 20px;
+			font-weight: bold;
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+		}
+		.bg-image {
+			/* The image used */
+			  background-image: url("bg3.jfif");
+			  
+			  
+			  
+			  /* Full height */
+			   width: 100%;
+				height: auto;
+			  
+			  /* Center and scale the image nicely */
+			  background-position: center;
+			  background-repeat: no-repeat;
+			  background-size: cover;
+		}
+		.bg-image2 {
+			/* The image used */
+			  background-image: url("bg4.jfif");
+			  
+			  
+			  /* Full height */
+			  width: 100%;
+				height: auto;
+			  
+			  /* Center and scale the image nicely */
+			  background-position: center;
+			  background-repeat: no-repeat;
+			  background-size: cover;
+		}
+		.bg-image3 {
+			/* The image used */
+			  background-image: url("bg5.jfif");
+			  
+			  
+			  /* Full height */
+			  width: 100%;
+				height: auto;
+			  
+			  /* Center and scale the image nicely */
+			  background-position: center;
+			  background-repeat: no-repeat;
+			  background-size: cover;
+		}
+		#char1{
+			width:55%;
+			font-size: 18px;
+			text-align: center;
+			font-family: Times New Roman;
+		}
+		.headt{
+			background-color:  #adc2eb;
+		}
+		.circle{
+			
+			display:inline-block
+		}
+		.btn{
+			background-color: rgba(248,250,249,0.3);
+			background-repeat:no-repeat;
+			border: transparent;
+			cursor:pointer;
+			overflow: hidden;
+			width:230px;
+			height:230px;
+			outline:none;
+			margin:28px;
+			position: relative;
+			text-align: center;
+			
+		}
+		p{
+			padding: 10px;
+			text-align:center;
+			font-family: Times New Roman;
+		}
+		.datat{
+			text-align: center;
+		}
+		.overlay {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 100%;
+			width: 100%;
+			opacity: 0;
+			transition: .1s ease;
+			background-color: black;
+			
+		}
+
+		.btn:hover .overlay {
+			opacity: 1;
+		}
+
+		.text {
+			color: white;
+			font-size: 20px;
+			font-family: Times New Roman;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			text-align: center;
+			
+		}
+		.head1{
+			font-family: impact; 
+			margin:30px;
+			font-size:30px;
+			letter-spacing: 25px;
+			text-align: center;
+			padding:10px;
+			color: white;
+		}
+		</style>
+				<script
+		  src="https://code.jquery.com/jquery-3.4.1.js"
+		  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		  crossorigin="anonymous"></script>
+				<script>
+		// Open and close sidebar
+		function openNav() {
+		  document.getElementById("mySidebar").style.width = "60%";
+		  document.getElementById("mySidebar").style.display = "block";
+		}
+
+		function closeNav() {
+		  document.getElementById("mySidebar").style.display = "none";
+		}
+
+		var data;
+		//click on names and picture shows up on left.replaces left picture.
+            function getData(){
+                $.get("http://10.79.164.97:8500/characters?=id",function(results){
+                    data = JSON.parse(results);
+					getCharacters();
+                    //document.write(data);
+                });
+            }
+            function getCharacters(){
+                var build = "";
+				var build2="";
+				var build3="";
+                var output = document.getElementById("output");
+				var output2=document.getElementById("output2");
+				var output3=document.getElementById("output3");
+                for(var i = 0; i<data.length; i++){
+					if(data[i].Class.substring(0,1)=="1"){
+						build+="<div type='button' class='btn' data-toggle='modal' data-target='#myModal'"+i+">"+
+						"<br><br><img class='circle' src='"+data[i].Image+"' alt='Avatar'>"+
+						"<div class = 'overlay'><span class = 'text'>"+data[i].Name+"<br>"+"School: "+
+										data[i].School+"<br>Class: "+data[i].Class+"<br>"+"Unit: "+data[i].Unit+"<br>Club: "+data[i].Club+"</span></div></div>";
+					}
+					
+                }
+                output.innerHTML = build;
+				for(var i = 0; i<data.length; i++){
+					if(data[i].Class.substring(0,1)=="2"){
+						build2+="<div type='button' class='btn' data-toggle='modal' data-target='#myModal'"+i+">"+
+						"<br><br><img class='circle' src='"+data[i].Image+"' alt='Avatar'>"+
+						"<div class = 'overlay'><span class = 'text'>"+data[i].Name+"<br>"+"School: "+
+										data[i].School+"<br>Class: "+data[i].Class+"<br>"+"Unit: "+data[i].Unit+"<br>Club: "+data[i].Club+"</span></div></div>";
+					}
+					
+                }
+                output2.innerHTML = build2;
+				for(var i = 0; i<data.length; i++){
+					if(data[i].Class.substring(0,1)=="3"){
+						build3+="<div type='button' class='btn' data-toggle='modal' data-target='#myModal'"+i+">"+
+						"<br><br><img class='circle' src='"+data[i].Image+"' alt='Avatar'>"+
+						"<div class = 'overlay'><span class = 'text'>"+data[i].Name+"<br>"+"School: "+
+										data[i].School+"<br>Class: "+data[i].Class+"<br>"+"Unit: "+data[i].Unit+"<br>Club: "+data[i].Club+"</span></div></div>";
+					}
+					
+                }
+                output3.innerHTML = build3;
+            }
+		</script>
+	</head>
+		<body onload="getData()">
+		<!-- Hidden Sidebar (reveals when clicked on menu icon)-->
+		<nav class="w3-sidebar w3-black w3-animate-right w3-xxlarge" style="display:none;padding-top:150px;right:0;z-index:2" id="mySidebar">
+		  <a href="javascript:void(0)" onclick="closeNav()" class="w3-button w3-black w3-xxxlarge w3-display-topright" style="padding:0 12px;">
+			<i class="fa fa-remove"></i>
+		  </a>
+		  <div class="w3-bar-block w3-center">
+			<a href="home.html" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Home</a>
+			<a href="characters.html" class="w3-bar-item w3-button w3-text-grey w3-hover-black" >Characters</a>
+			<a href="disco.html" class="w3-bar-item w3-button w3-text-grey w3-hover-black" >Discography</a>
+		  </div>
+		</nav>
+		<!-- Header -->
+	  
+		<div class="hero-image">
+		  <div class="hero-text">
+			<h1 style="font-size:65px">CHARACTERS</h1>
+		  </div>
+		</div>
+		<div class="bg-image"><div class="head1"><br>Grade 1</div><span id="output"></span></div>
+		<div class="bg-image2"><div class="head1"><br>Grade 2</div><span id="output2"></span></div>
+		<div class="bg-image3"><div class="head1"><br>Grade 3</div><span id="output3"></span></div>
+		<!-- Page Content -->
+		
+		<div class="w3-main w3-padding-large" >
+			<!-- Menu icon to open sidebar -->
+			<span class="w3-button w3-top w3-white w3-xxlarge w3-text-grey w3-hover-text-black" style="width:auto;right:0;" onclick="openNav()"><i class="fa fa-bars"></i></span>
+		</div>
+		
+	</body>
+</html>
